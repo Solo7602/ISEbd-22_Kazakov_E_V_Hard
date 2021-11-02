@@ -85,7 +85,7 @@ namespace labaBuldozerKazakovISEbd_22
         {
             Pen pen = new Pen(Color.Black);
             g.DrawRectangle(pen, _startPosX + 70, _startPosY + 51, 150, 50);
-            Brush brRed = new SolidBrush(Color.Red);
+            Brush brRed = new SolidBrush(MainColor);
             g.FillRectangle(brRed, _startPosX + 71, _startPosY + 52, 149, 50);
             Brush brBlue = new SolidBrush(Color.Blue);
             g.DrawRectangle(pen, _startPosX + 89, _startPosY, 20, 50);

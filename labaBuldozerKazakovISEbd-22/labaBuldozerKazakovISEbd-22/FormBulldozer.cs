@@ -16,11 +16,16 @@ namespace labaBuldozerKazakovISEbd_22
 		{
 			InitializeComponent();
 		}
-		private void Draw()
+		public void SetBulldozer(IBulldozer bulldozer)
+		{
+			this.bulldozer = bulldozer;
+			Draw();
+		}
+			private void Draw()
 		{
 			Bitmap bmp = new Bitmap(Picture.Width, Picture.Height);
 			Graphics gr = Graphics.FromImage(bmp);
-			bulldozer.DrawTransport(gr);
+			bulldozer?.DrawTransport(gr);
 			Picture.Image = bmp;
 		}
 		private void buttonCreate_Click(object sender, EventArgs e)

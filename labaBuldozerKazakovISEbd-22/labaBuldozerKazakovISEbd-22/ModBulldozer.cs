@@ -44,6 +44,7 @@ namespace labaBuldozerKazakovISEbd_22
                 g.DrawLine(pen, _startPosX + 220, _startPosY + 71, _startPosX + 250, _startPosY + 51);
                 g.DrawLine(pen, _startPosX + 220, _startPosY + 91, _startPosX + 250, _startPosY + 51);
                 g.DrawRectangle(pen, _startPosX + 230, _startPosY + 31, 40, 20);
+                g.FillRectangle(dopBrush, _startPosX + 230, _startPosY + 31, 40, 20);
             }
             if (Bucket)
             {
@@ -51,6 +52,7 @@ namespace labaBuldozerKazakovISEbd_22
                 g.DrawLine(pen, _startPosX + 40, _startPosY + 51, _startPosX + 40, _startPosY + 151);
                 g.DrawLine(pen, _startPosX + 40, _startPosY + 151, _startPosX, _startPosY + 151);
                 g.DrawLine(pen, _startPosX, _startPosY + 151, _startPosX + 40, _startPosY + 51);
+
             }
             base.DrawTransport(g);
             interdop.DrawDop(g, _startPosX, _startPosY);

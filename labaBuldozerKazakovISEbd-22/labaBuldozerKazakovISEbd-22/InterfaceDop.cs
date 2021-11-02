@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace labaBuldozerKazakovISEbd_22
 {
-    interface InterDop
+    public interface InterDop
     {
         int Wheel { set; }
         void DrawDop(Graphics g, float x, float y);

@@ -16,7 +16,7 @@ namespace labaBuldozerKazakovISEbd_22
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new FormBulldozer());
+			Application.Run(new ParkingPlace());
 		}
 	}
 }
