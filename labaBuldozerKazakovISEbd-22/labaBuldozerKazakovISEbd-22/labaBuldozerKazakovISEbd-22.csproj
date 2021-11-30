@@ -55,6 +55,12 @@
     <Compile Include="FormBulldozer.Designer.cs">
       <DependentUpon>FormBulldozer.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCFG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCFG.Designer.cs">
+      <DependentUpon>FormCFG.cs</DependentUpon>
+    </Compile>
     <Compile Include="IBulldozer.cs" />
     <Compile Include="InterfaceDop.cs" />
     <Compile Include="ModBulldozer.cs" />
@@ -75,6 +81,9 @@
     <Compile Include="Wheels.cs" />
     <EmbeddedResource Include="FormBulldozer.resx">
       <DependentUpon>FormBulldozer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCFG.resx">
+      <DependentUpon>FormCFG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ParkingPlace.resx">
       <DependentUpon>ParkingPlace.cs</DependentUpon>

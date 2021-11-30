@@ -57,5 +57,13 @@ namespace labaBuldozerKazakovISEbd_22
             base.DrawTransport(g);
             interdop.DrawDop(g, _startPosX, _startPosY);
         }
+        public void SetIDop(InterDop idop)
+        {
+            this.interdop = idop;
+        }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }

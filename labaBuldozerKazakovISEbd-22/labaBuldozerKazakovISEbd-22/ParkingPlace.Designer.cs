@@ -31,7 +31,6 @@ namespace labaBuldozerKazakovISEbd_22
         {
             this.pictureBoxPark = new System.Windows.Forms.PictureBox();
             this.buttonParking = new System.Windows.Forms.Button();
-            this.buttonModParking = new System.Windows.Forms.Button();
             this.groupBoxPark = new System.Windows.Forms.GroupBox();
             this.buttonInQueue = new System.Windows.Forms.Button();
             this.maskedTextBoxNumber = new System.Windows.Forms.MaskedTextBox();
@@ -64,16 +63,6 @@ namespace labaBuldozerKazakovISEbd_22
             this.buttonParking.Text = "Припарковать бульдозер";
             this.buttonParking.UseVisualStyleBackColor = true;
             this.buttonParking.Click += new System.EventHandler(this.buttonParking_Click);
-            // 
-            // buttonModParking
-            // 
-            this.buttonModParking.Location = new System.Drawing.Point(698, 301);
-            this.buttonModParking.Name = "buttonModParking";
-            this.buttonModParking.Size = new System.Drawing.Size(96, 53);
-            this.buttonModParking.TabIndex = 2;
-            this.buttonModParking.Text = "Припарковать улучшенный бульдозер";
-            this.buttonModParking.UseVisualStyleBackColor = true;
-            this.buttonModParking.Click += new System.EventHandler(this.buttonModParking_Click);
             // 
             // groupBoxPark
             // 
@@ -116,11 +105,11 @@ namespace labaBuldozerKazakovISEbd_22
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(-1, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 13);
+            this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Забрать бульдозер";
+            this.label1.Text = "Добавить бульдозер";
             // 
             // label3
             // 
@@ -168,7 +157,7 @@ namespace labaBuldozerKazakovISEbd_22
             // 
             // buttonOutQueue
             // 
-            this.buttonOutQueue.Location = new System.Drawing.Point(698, 205);
+            this.buttonOutQueue.Location = new System.Drawing.Point(698, 214);
             this.buttonOutQueue.Name = "buttonOutQueue";
             this.buttonOutQueue.Size = new System.Drawing.Size(96, 34);
             this.buttonOutQueue.TabIndex = 9;
@@ -188,7 +177,6 @@ namespace labaBuldozerKazakovISEbd_22
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBoxPark);
-            this.Controls.Add(this.buttonModParking);
             this.Controls.Add(this.buttonParking);
             this.Controls.Add(this.pictureBoxPark);
             this.Name = "ParkingPlace";
@@ -205,7 +193,6 @@ namespace labaBuldozerKazakovISEbd_22
 
         private System.Windows.Forms.PictureBox pictureBoxPark;
         private System.Windows.Forms.Button buttonParking;
-        private System.Windows.Forms.Button buttonModParking;
         private System.Windows.Forms.GroupBox groupBoxPark;
         private System.Windows.Forms.Button buttonInQueue;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxNumber;

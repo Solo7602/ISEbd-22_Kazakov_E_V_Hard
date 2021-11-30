@@ -27,5 +27,6 @@ namespace labaBuldozerKazakovISEbd_22
         /// </summary>
         /// <param name="g"></param>
         void DrawTransport(Graphics g);
+        void SetMainColor(Color color);
     }
 }
