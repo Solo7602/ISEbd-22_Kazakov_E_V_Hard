@@ -10,51 +10,59 @@ using System.Windows.Forms;
 
 namespace labaBuldozerKazakovISEbd_22
 {
-    public partial class ParkingPlace : Form
-    {
-		private readonly Parking<BuldozerBase, InterDop> parking;
+	public partial class ParkingPlace : Form
+	{
+		private readonly ParkingCollection parkingCollection;
+		private Queue<VehicleBuldozer> queue;
 		public ParkingPlace()
 		{
 			InitializeComponent();
-			parking = new Parking<BuldozerBase, InterDop>(pictureBoxPark.Width,
+			parkingCollection = new ParkingCollection(pictureBoxPark.Width,
 pictureBoxPark.Height);
+			queue = new Queue<VehicleBuldozer>();
 			Draw();
 		}
-		private void Draw()
+		private void ReloadLevels()
 		{
-			Bitmap bmp = new Bitmap(pictureBoxPark.Width, pictureBoxPark.Height);
-			Graphics gr = Graphics.FromImage(bmp);
-			parking?.Draw(gr);
-			pictureBoxPark.Image = bmp;
-		}
-        private void buttonParking_MouseClick(object sender, MouseEventArgs e)
-        {
-			ColorDialog dialog = new ColorDialog();
-			if (dialog.ShowDialog() == DialogResult.OK)
+			int index = listBoxParking.SelectedIndex;
+			listBoxParking.Items.Clear();
+			for (int i = 0; i < parkingCollection.Keys.Count; i++)
 			{
-				var buldozer = new BuldozerBase(100, 1000, dialog.Color);
-				if (parking + buldozer != -1)
-				{
-					Draw();
-				}
-				else
-				{
-					MessageBox.Show("Парковка переполнена");
-				}
+				listBoxParking.Items.Add(parkingCollection.Keys[i]);
+			}
+			if (listBoxParking.Items.Count > 0 && (index == -1 || index >=
+		   listBoxParking.Items.Count))
+			{
+				listBoxParking.SelectedIndex = 0;
+			}
+			else if (listBoxParking.Items.Count > 0 && index > -1 && index <
+		   listBoxParking.Items.Count)
+			{
+				listBoxParking.SelectedIndex = index;
 			}
 		}
 
-        private void buttonModParking_MouseClick(object sender, MouseEventArgs e)
-        {
-			ColorDialog dialog = new ColorDialog();
-			if (dialog.ShowDialog() == DialogResult.OK)
+		private void Draw()
+		{
+			if (listBoxParking.SelectedIndex > -1)
 			{
-				ColorDialog dialogDop = new ColorDialog();
-				if (dialogDop.ShowDialog() == DialogResult.OK)
+				Bitmap bmp = new Bitmap(pictureBoxPark.Width, pictureBoxPark.Height);
+				Graphics gr = Graphics.FromImage(bmp);
+				parkingCollection[listBoxParking.SelectedItem.ToString()].Draw(gr);
+				pictureBoxPark.Image = bmp;
+			}
+		}
+
+		private void buttonParking_Click(object sender, EventArgs e)
+		{
+			if (listBoxParking.SelectedIndex > -1)
+			{
+				ColorDialog dialog = new ColorDialog();
+				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					var buldozer = new ModBuldozer(100, 1000, dialog.Color, dialogDop.Color,
-				   true, true, 2, 2);
-					if (parking + buldozer != -1)
+					var bulldozer = new BuldozerBase(100, 1000, dialog.Color);
+					if (parkingCollection[listBoxParking.SelectedItem.ToString()] +
+						bulldozer)
 					{
 						Draw();
 					}
@@ -64,21 +72,95 @@ pictureBoxPark.Height);
 					}
 				}
 			}
+
+
 		}
 
-        private void buttonOutPark_MouseClick(object sender, MouseEventArgs e)
-        {
-			if (maskedTextBoxNumber.Text != "")
+		private void buttonDelete_Click(object sender, EventArgs e)
+		{
+			if (listBoxParking.SelectedIndex > -1)
 			{
-				var bulldozer = parking - Convert.ToInt32(maskedTextBoxNumber.Text);
-				if (bulldozer != null)
+				if (MessageBox.Show($"Удалить парковку { listBoxParking.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					FormBulldozer form = new FormBulldozer();
-					form.SetBulldozer(bulldozer);
-					form.ShowDialog();
+					parkingCollection.DelParking(textBoxName.Text);
+					ReloadLevels();
 				}
-				Draw();
 			}
 		}
-    }
+		private void listBoxParking_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			Draw();
+		}
+
+		private void buttonModParking_Click(object sender, EventArgs e)
+		{
+			if (listBoxParking.SelectedIndex > -1)
+			{
+				ColorDialog dialog = new ColorDialog();
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					ColorDialog dialogDop = new ColorDialog();
+					if (dialogDop.ShowDialog() == DialogResult.OK)
+					{
+						var bulldozer = new ModBuldozer(100, 1000, dialog.Color,
+					   dialogDop.Color, true, true,2,2);
+						if (parkingCollection[listBoxParking.SelectedItem.ToString()]
++ bulldozer)
+						{
+							Draw();
+						}
+						else
+						{
+							MessageBox.Show("Парковка переполнена");
+						}
+					}
+				}
+			}
+
+		}
+
+        private void buttonInQueue_Click(object sender, EventArgs e)
+        {
+			if (queue.Count > 0)
+			{
+				var bull = queue.Dequeue();
+				if (bull != null)
+				{
+					FormBulldozer form = new FormBulldozer();
+					Random rand = new Random();
+					bull.SetPosition(rand.Next(150), rand.Next(150), form.Size.Width, form.Size.Height);
+					form.SetBulldozer(bull);
+					form.ShowDialog();
+				}
+			}
+			Draw();
+		}
+		private void buttonAddParking_Click(object sender, EventArgs e)
+		{
+			if (string.IsNullOrEmpty(textBoxName.Text))
+			{
+				MessageBox.Show("Введите название парковки", "Ошибка",
+			   MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			parkingCollection.AddParking(textBoxName.Text);
+			ReloadLevels();
+
+		}
+
+		private void buttonOutQueue_Click(object sender, EventArgs e)
+        {
+			if (listBoxParking.SelectedIndex > -1 && maskedTextBoxNumber.Text != "")
+			{
+				var ship = parkingCollection[listBoxParking.SelectedItem.ToString()] -
+					Convert.ToInt32(maskedTextBoxNumber.Text);
+				queue.Enqueue(ship);
+			}
+			Draw();
+		}
+	}
 }
+
+
+
+

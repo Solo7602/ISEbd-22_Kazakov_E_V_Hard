@@ -11,7 +11,8 @@ namespace labaBuldozerKazakovISEbd_22
         where T : class, IBulldozer
         where W : InterDop
     {
-        private readonly T[] _places;
+        private readonly List<T> _places;
+        private readonly int _maxCount;
         private readonly int pictureWidth;
         private readonly int pictureHeight;
         private readonly int _placeSizeWidth = 305;
@@ -20,39 +21,29 @@ namespace labaBuldozerKazakovISEbd_22
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _maxCount = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _places = new List<T>();
         }
-        public static int operator +(Parking<T, W> p, T car)
+        public static bool operator +(Parking<T, W> p, T bulldozer)
         {
-            int changeSize = 0;
-            int width = p.pictureWidth / p._placeSizeWidth;
-
-            for (int i = 0; i < p._places.Length; i++)
+            if (p._places.Count >= p._maxCount)
             {
-                if (p.CheckFreePlace(i))
-                {
-                    p._places[i] = car;
-                    p._places[i].SetPosition(i % width * p._placeSizeWidth + changeSize, i / width * p._placeSizeHeight + changeSize + 3, p.pictureWidth, p.pictureHeight);
-                    return i;
-                }
+                return false;
             }
-            return -1;
+            p._places.Add(bulldozer);
+            return true;
         }
         public static T operator -(Parking<T, W> p, int index)
         {
-            if (index < 0 || index > p._places.Length)
+            if (index < -1 || index >= p._places.Count)
             {
                 return null;
             }
-            if (!p.CheckFreePlace(index))
-            {
-                T vehicle = p._places[index];
-                p._places[index] = null;
-                return vehicle;
-            }
-            return null;
+            T bulldozer = p._places[index];
+            p._places.RemoveAt(index);
+            return bulldozer;
         }
 
         public static bool operator >=(Parking<T,W> p, int d)
@@ -79,15 +70,16 @@ namespace labaBuldozerKazakovISEbd_22
             }
             return x <= d;
         }
-        private bool CheckFreePlace(int indexPlace)
-        {
-            return _places[indexPlace] == null;
-        }
         public void Draw(Graphics g)
         {
+            int changeHeight = 10;
+            int width = pictureWidth / _placeSizeWidth;
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; i++)
             {
+                _places[i].SetPosition(i % width * _placeSizeWidth + changeHeight,
+                                    i / width * _placeSizeHeight + changeHeight, pictureWidth,
+                                    pictureHeight);
                 _places[i]?.DrawTransport(g);
             }
         }
@@ -103,6 +95,20 @@ namespace labaBuldozerKazakovISEbd_22
                 }
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
                (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
+            }
+        }
+        public T this[int ind]
+        {
+            get
+            {
+                if (ind > -1 && ind < _places.Count)
+                    return _places[ind];
+                return null;
+            }
+            set
+            {
+                if (ind > -1 && ind < _places.Count)
+                    _places[ind] = value;
             }
         }
     }

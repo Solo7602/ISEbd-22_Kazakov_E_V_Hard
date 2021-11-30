@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace labaBuldozerKazakovISEbd_22
 {
-    class SimpleWheel : InterDop
+    public class SimpleWheel : InterDop
     {
         private enumWheel dopEnum;
         public int Wheel { set => dopEnum = (enumWheel)value; }
