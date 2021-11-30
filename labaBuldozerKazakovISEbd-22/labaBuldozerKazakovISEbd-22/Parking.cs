@@ -37,7 +37,7 @@ namespace labaBuldozerKazakovISEbd_22
         }
         public static T operator -(Parking<T, W> p, int index)
         {
-            if (index < -1 || index >= p._places.Count)
+            if (index < -1 || index > p._places.Count)
             {
                 return null;
             }
