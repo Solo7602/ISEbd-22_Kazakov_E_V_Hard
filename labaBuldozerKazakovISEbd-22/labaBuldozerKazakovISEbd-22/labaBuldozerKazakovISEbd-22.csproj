@@ -59,6 +59,7 @@
     <Compile Include="InterfaceDop.cs" />
     <Compile Include="ModBulldozer.cs" />
     <Compile Include="Parking.cs" />
+    <Compile Include="ParkingCollection.cs" />
     <Compile Include="ParkingPlace.cs">
       <SubType>Form</SubType>
     </Compile>
