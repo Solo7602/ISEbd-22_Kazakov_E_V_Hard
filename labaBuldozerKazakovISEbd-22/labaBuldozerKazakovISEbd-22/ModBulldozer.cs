@@ -35,6 +35,31 @@ namespace labaBuldozerKazakovISEbd_22
                     break;
             }
         }
+        public ModBuldozer(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 7)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromArgb(Convert.ToInt32(strs[2]));
+                DopColor = Color.FromArgb(Convert.ToInt32(strs[3]));
+                BackSpoiler = Convert.ToBoolean(strs[4]);
+                Bucket = Convert.ToBoolean(strs[5]);
+                switch (strs[6])
+                {
+                    case "SimpleWheel":
+                        interdop = new SimpleWheel(2);
+                        break;
+                    case "RhombWheel":
+                        interdop = new RhombWheel(2);
+                        break;
+                    case "RectangleWheel":
+                        interdop = new RectangleWheel(2);
+                        break;
+                }
+            }
+        }
         public override void DrawTransport(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
@@ -64,6 +89,11 @@ namespace labaBuldozerKazakovISEbd_22
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+        public override string ToString()
+        {
+            return
+           $"{base.ToString()}{separator}{DopColor.ToArgb()}{separator}{BackSpoiler}{separator}{Bucket}{separator}{interdop.GetType().Name}";
         }
     }
 }

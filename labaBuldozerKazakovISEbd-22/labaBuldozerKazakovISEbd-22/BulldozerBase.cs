@@ -17,6 +17,7 @@ namespace labaBuldozerKazakovISEbd_22
         /// Высота отрисовки автомобиля
         /// </summary>
         protected readonly int BulldozerHeight = 152;
+        protected readonly char separator = ';';
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -28,6 +29,16 @@ namespace labaBuldozerKazakovISEbd_22
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+        }
+        public BuldozerBase(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromArgb(Convert.ToInt32(strs[2]));
+            }
         }
         /// <summary>
         /// Конструкторс изменением размеров машины
@@ -106,6 +117,10 @@ namespace labaBuldozerKazakovISEbd_22
             g.DrawLine(pen, _startPosX + 120, _startPosY + 51, _startPosX + 120, _startPosY + 40);
             g.DrawLine(pen, _startPosX + 140, _startPosY + 51, _startPosX + 140, _startPosY + 40);
             g.DrawArc(pen, _startPosX + 120, _startPosY + 30, 20, 20, 180, 180);
+        }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.ToArgb()}";
         }
     }
 }

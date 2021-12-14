@@ -42,15 +42,24 @@ namespace labaBuldozerKazakovISEbd_22
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddParking = new System.Windows.Forms.Button();
             this.buttonOutQueue = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьПарковкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьПарковкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPark)).BeginInit();
             this.groupBoxPark.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxPark
             // 
-            this.pictureBoxPark.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxPark.Location = new System.Drawing.Point(0, 27);
             this.pictureBoxPark.Name = "pictureBoxPark";
-            this.pictureBoxPark.Size = new System.Drawing.Size(683, 449);
+            this.pictureBoxPark.Size = new System.Drawing.Size(683, 422);
             this.pictureBoxPark.TabIndex = 0;
             this.pictureBoxPark.TabStop = false;
             // 
@@ -134,6 +143,7 @@ namespace labaBuldozerKazakovISEbd_22
             this.listBoxParking.Name = "listBoxParking";
             this.listBoxParking.Size = new System.Drawing.Size(106, 82);
             this.listBoxParking.TabIndex = 6;
+            this.listBoxParking.SelectedIndexChanged += new System.EventHandler(this.listBoxParking_SelectedIndexChanged);
             // 
             // buttonDelete
             // 
@@ -165,6 +175,64 @@ namespace labaBuldozerKazakovISEbd_22
             this.buttonOutQueue.UseVisualStyleBackColor = true;
             this.buttonOutQueue.Click += new System.EventHandler(this.buttonOutQueue_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.загрузитьToolStripMenuItem,
+            this.сохранитьПарковкуToolStripMenuItem,
+            this.загрузитьПарковкуToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            // 
+            // сохранитьПарковкуToolStripMenuItem
+            // 
+            this.сохранитьПарковкуToolStripMenuItem.Name = "сохранитьПарковкуToolStripMenuItem";
+            this.сохранитьПарковкуToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.сохранитьПарковкуToolStripMenuItem.Text = "Сохранить парковку";
+            this.сохранитьПарковкуToolStripMenuItem.Click += new System.EventHandler(this.сохранитьПарковкуToolStripMenuItem_Click);
+            // 
+            // загрузитьПарковкуToolStripMenuItem
+            // 
+            this.загрузитьПарковкуToolStripMenuItem.Name = "загрузитьПарковкуToolStripMenuItem";
+            this.загрузитьПарковкуToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.загрузитьПарковкуToolStripMenuItem.Text = "Загрузить парковку";
+            this.загрузитьПарковкуToolStripMenuItem.Click += new System.EventHandler(this.загрузитьПарковкуToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "txt file | *.txt";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "txt file | *.txt";
+            // 
             // ParkingPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,11 +247,15 @@ namespace labaBuldozerKazakovISEbd_22
             this.Controls.Add(this.groupBoxPark);
             this.Controls.Add(this.buttonParking);
             this.Controls.Add(this.pictureBoxPark);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "ParkingPlace";
             this.Text = "Парковка";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPark)).EndInit();
             this.groupBoxPark.ResumeLayout(false);
             this.groupBoxPark.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +276,13 @@ namespace labaBuldozerKazakovISEbd_22
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAddParking;
         private System.Windows.Forms.Button buttonOutQueue;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьПарковкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьПарковкуToolStripMenuItem;
     }
 }
