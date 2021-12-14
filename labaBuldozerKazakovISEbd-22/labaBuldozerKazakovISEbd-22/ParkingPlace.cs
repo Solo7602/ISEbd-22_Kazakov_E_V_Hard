@@ -55,23 +55,6 @@ pictureBoxPark.Height);
 
 		private void buttonParking_Click(object sender, EventArgs e)
 		{
-			//if (listBoxParking.SelectedIndex > -1)
-			//{
-			//	ColorDialog dialog = new ColorDialog();
-			//	if (dialog.ShowDialog() == DialogResult.OK)
-			//	{
-			//		var bulldozer = new BuldozerBase(100, 1000, dialog.Color);
-			//		if (parkingCollection[listBoxParking.SelectedItem.ToString()] +
-			//			bulldozer)
-			//		{
-			//			Draw();
-			//		}
-			//		else
-			//		{
-			//			MessageBox.Show("Парковка переполнена");
-			//		}
-			//	}
-			//}
 			var formCFG = new FormCFG();
 			formCFG.AddEvent(AddBul);
 			formCFG.Show();
