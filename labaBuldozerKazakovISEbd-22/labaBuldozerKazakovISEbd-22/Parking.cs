@@ -111,5 +111,17 @@ namespace labaBuldozerKazakovISEbd_22
                     _places[ind] = value;
             }
         }
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _places.Count)
+            {
+                return null;
+            }
+            return _places[index];
+        }
+        public void Clear()
+        {
+            _places.Clear();
+        }
     }
 }
