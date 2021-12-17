@@ -55,23 +55,9 @@ pictureBoxPark.Height);
 
 		private void buttonParking_Click(object sender, EventArgs e)
 		{
-			if (listBoxParking.SelectedIndex > -1)
-			{
-				ColorDialog dialog = new ColorDialog();
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					var bulldozer = new BuldozerBase(100, 1000, dialog.Color);
-					if (parkingCollection[listBoxParking.SelectedItem.ToString()] +
-						bulldozer)
-					{
-						Draw();
-					}
-					else
-					{
-						MessageBox.Show("Парковка переполнена");
-					}
-				}
-			}
+			var formCFG = new FormCFG();
+			formCFG.AddEvent(AddBul);
+			formCFG.Show();
 
 
 		}
@@ -121,17 +107,11 @@ pictureBoxPark.Height);
 
         private void buttonInQueue_Click(object sender, EventArgs e)
         {
-			if (queue.Count > 0)
+			if (listBoxParking.SelectedIndex > -1 && maskedTextBoxNumber.Text != "")
 			{
-				var bull = queue.Dequeue();
-				if (bull != null)
-				{
-					FormBulldozer form = new FormBulldozer();
-					Random rand = new Random();
-					bull.SetPosition(rand.Next(150), rand.Next(150), form.Size.Width, form.Size.Height);
-					form.SetBulldozer(bull);
-					form.ShowDialog();
-				}
+				var buldozer = parkingCollection[listBoxParking.SelectedItem.ToString()] -
+					Convert.ToInt32(maskedTextBoxNumber.Text);
+				queue.Enqueue(buldozer);
 			}
 			Draw();
 		}
@@ -150,13 +130,33 @@ pictureBoxPark.Height);
 
 		private void buttonOutQueue_Click(object sender, EventArgs e)
         {
-			if (listBoxParking.SelectedIndex > -1 && maskedTextBoxNumber.Text != "")
+			if (queue.Count > 0)
 			{
-				var ship = parkingCollection[listBoxParking.SelectedItem.ToString()] -
-					Convert.ToInt32(maskedTextBoxNumber.Text);
-				queue.Enqueue(ship);
+				var bull = queue.Dequeue();
+				if (bull != null)
+				{
+					FormBulldozer form = new FormBulldozer();
+					Random rand = new Random();
+					bull.SetPosition(rand.Next(150), rand.Next(150), form.Size.Width, form.Size.Height);
+					form.SetBulldozer(bull);
+					form.ShowDialog();
+				}
 			}
 			Draw();
+		}
+		private void AddBul(VehicleBuldozer car)
+		{
+			if (car != null && listBoxParking.SelectedIndex > -1)
+			{
+				if ((parkingCollection[listBoxParking.SelectedItem.ToString()]) + car)
+				{
+					Draw();
+				}
+				else
+				{
+					MessageBox.Show("Машину не удалось поставить");
+				}
+			}
 		}
 	}
 }
