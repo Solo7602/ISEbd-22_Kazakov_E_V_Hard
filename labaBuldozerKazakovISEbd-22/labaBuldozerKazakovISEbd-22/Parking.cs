@@ -30,7 +30,7 @@ namespace labaBuldozerKazakovISEbd_22
         {
             if (p._places.Count >= p._maxCount)
             {
-                return false;
+                throw new ParkingOverflowException();
             }
             p._places.Add(bulldozer);
             return true;
@@ -39,7 +39,7 @@ namespace labaBuldozerKazakovISEbd_22
         {
             if (index < -1 || index > p._places.Count)
             {
-                return null;
+                throw new ParkingNotFoundException(index);
             }
             T bulldozer = p._places[index];
             p._places.RemoveAt(index);
