@@ -15,11 +15,6 @@ namespace labaBuldozerKazakovISEbd_22
             {
                 return ComparerModBul(x as ModBuldozer, y as ModBuldozer);
             }
-            if (x is BuldozerBase && y is BuldozerBase)
-            {
-                return ComparerBul(x as BuldozerBase, y as BuldozerBase);
-            }
-
             if (x is ModBuldozer && y is BuldozerBase)
             {
                 return -1;
@@ -27,6 +22,10 @@ namespace labaBuldozerKazakovISEbd_22
             if (x is BuldozerBase && y is ModBuldozer)
             {
                 return 1;
+            }
+            if (x is BuldozerBase && y is BuldozerBase)
+            {
+                return ComparerBul(x as BuldozerBase, y as BuldozerBase);
             }
             return 0;
         }
