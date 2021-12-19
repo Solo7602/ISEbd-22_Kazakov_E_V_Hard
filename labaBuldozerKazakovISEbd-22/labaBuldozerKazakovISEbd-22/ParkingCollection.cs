@@ -61,24 +61,19 @@ namespace labaBuldozerKazakovISEbd_22
 				{
 					//Начинаем парковку
 					sw.Write($"Parking{separator}{level.Key}{Environment.NewLine}");
-					IBulldozer buldozer = null;
-					for (int i = 0; (buldozer = level.Value.GetNext(i)) != null; i++)
+					foreach (IBulldozer buldozer in level.Value)
 					{
-						if (buldozer != null)
+						//Записываем тип машины
+						if (buldozer.GetType().Name == "BuldozerBase")
 						{
-							//если место не пустое
-							//Записываем тип машины
-							if (buldozer.GetType().Name == "BuldozerBase")
-							{
-								sw.Write($"BuldozerBase{separator}");
-							}
-							if (buldozer.GetType().Name == "ModBuldozer")
-							{
-								sw.Write($"ModBuldozer{separator}");
-							}
-							//Записываемые параметры
-							sw.Write(buldozer + Environment.NewLine);
+							sw.Write($"BuldozerBase{separator}");
 						}
+						if (buldozer.GetType().Name == "ModBuldozer")
+						{
+							sw.Write($"ModBuldozer{separator}");
+						}
+						//Записываемые параметры
+						sw.Write(buldozer + Environment.NewLine);
 					}
 				}
 			}
@@ -104,7 +99,7 @@ namespace labaBuldozerKazakovISEbd_22
 				}
 				VehicleBuldozer buldozer = null;
 				string key = string.Empty;
-				for (int i = 1; !sr.EndOfStream; ++i)
+				while(!sr.EndOfStream)
 				{
 					//идем по считанным записям
 					bufferTextFromFile = sr.ReadLine();
@@ -145,26 +140,25 @@ namespace labaBuldozerKazakovISEbd_22
 				sw.Write($"Park{Environment.NewLine}");
 					//Начинаем парковку
 					sw.Write($"Parking{separator}{name}{Environment.NewLine}");
-					IBulldozer buldozer = null;
-				for (int i = 0; (buldozer = parkingStages[name].GetNext(i)) != null; i++)
-					{
+				foreach (IBulldozer buldozer in parkingStages[name])
+				{
 					if (buldozer != null)
+					{
+						//если место не пустое
+						//Записываем тип машины
+						if (buldozer.GetType().Name == "BuldozerBase")
 						{
-							//если место не пустое
-							//Записываем тип машины
-							if (buldozer.GetType().Name == "BuldozerBase")
-							{
-								sw.Write($"BuldozerBase{separator}");
-							}
-							if (buldozer.GetType().Name == "ModBuldozer")
-							{
-								sw.Write($"ModBuldozer{separator}");
-							}
-							//Записываемые параметры
-							sw.Write(buldozer + Environment.NewLine);
+							sw.Write($"BuldozerBase{separator}");
 						}
+						if (buldozer.GetType().Name == "ModBuldozer")
+						{
+							sw.Write($"ModBuldozer{separator}");
+						}
+						//Записываемые параметры
+						sw.Write(buldozer + Environment.NewLine);
 					}
 				}
+			}
 		}
 		public void LoadDataPark(string filename)
 		{

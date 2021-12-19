@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Reflection;
 
 namespace labaBuldozerKazakovISEbd_22
 {
-    public class BuldozerBase : VehicleBuldozer
+    public class BuldozerBase : VehicleBuldozer, IEquatable<BuldozerBase>, IComparable, IEnumerator<PropertyInfo>, IEnumerable<PropertyInfo>
     {
         /// <summary>
         /// Ширина отрисовки автомобиля
@@ -18,6 +20,10 @@ namespace labaBuldozerKazakovISEbd_22
         /// </summary>
         protected readonly int BulldozerHeight = 152;
         protected readonly char separator = ';';
+        public int currentIndex = -1;
+        private PropertyInfo[] myPropertyInfo => Type.GetType("ShipBasic").GetProperties();
+        public PropertyInfo Current => myPropertyInfo[currentIndex];
+        object IEnumerator.Current => myPropertyInfo[currentIndex];
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -121,6 +127,112 @@ namespace labaBuldozerKazakovISEbd_22
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.ToArgb()}";
+        }
+        public bool Equals(BuldozerBase other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is BuldozerBase carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
+        }
+
+        public int CompareTo(Object obj)
+        {
+            if (obj == null)
+            {
+                return -1;
+            }
+            if (!(obj is BuldozerBase carObj))
+            {
+                return -1;
+            }
+            else
+            {
+                return CompareTo(carObj);
+            }
+        }
+        public int CompareTo(BuldozerBase obj)
+        {
+            if (MaxSpeed != obj.MaxSpeed)
+            {
+                return MaxSpeed.CompareTo(obj.MaxSpeed);
+            }
+            if (Weight != obj.Weight)
+            {
+                return Weight.CompareTo(obj.Weight);
+            }
+            if (MainColor != obj.MainColor)
+            {
+                return MainColor.Name.CompareTo(obj.MainColor.Name);
+            }
+            return 0;
+        }
+        private void printProp()
+        {
+            foreach (var prop in this)
+            {
+                Console.WriteLine(prop.Name.ToString());
+            }
+        }
+
+        public void Dispose() { }
+        public bool MoveNext()
+        {
+            currentIndex++;
+            if (currentIndex >= myPropertyInfo.Length)
+            {
+                Reset();
+                return false;
+            }
+            return true;
+        }
+
+        public void Reset()
+        {
+            currentIndex = -1;
+        }
+
+        public IEnumerator<PropertyInfo> GetEnumerator()
+        {
+            return this;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }

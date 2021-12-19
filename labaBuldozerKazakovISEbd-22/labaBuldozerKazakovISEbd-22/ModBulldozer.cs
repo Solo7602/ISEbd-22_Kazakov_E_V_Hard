@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Reflection;
 
 namespace labaBuldozerKazakovISEbd_22
 {
-    public class ModBuldozer : BuldozerBase
+    public class ModBuldozer : BuldozerBase, IEquatable<BuldozerBase>, IComparable, IEnumerator<PropertyInfo>, IEnumerable<PropertyInfo>
     {
         private enumWheel dopEnum;
         public Color DopColor { private set; get; }
@@ -15,6 +16,7 @@ namespace labaBuldozerKazakovISEbd_22
         public bool Bucket { private set; get; }
         public int Wheel { set => dopEnum = (enumWheel)value; }
         private InterDop interdop;
+        public string IDopName => interdop.GetType().Name;
         public ModBuldozer(int maxSpeed, float weight, Color mainColor, Color dopColor, bool backSpoiler, bool bucket,int BulldozerType, int numwheels) :
             base(maxSpeed, weight, mainColor, 100, 60)
         {
@@ -94,6 +96,109 @@ namespace labaBuldozerKazakovISEbd_22
         {
             return
            $"{base.ToString()}{separator}{DopColor.ToArgb()}{separator}{BackSpoiler}{separator}{Bucket}{separator}{interdop.GetType().Name}";
+        }
+        public bool Equals(ModBuldozer other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (BackSpoiler != other.BackSpoiler)
+            {
+                return false;
+            }
+            if (Bucket != other.Bucket)
+            {
+                return false;
+            }
+            if (IDopName != other.IDopName)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is ModBuldozer carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
+        }
+        public int CompareTo(Object obj)
+        {
+            if (obj == null)
+            {
+                return -1;
+            }
+            if (!(obj is ModBuldozer carObj))
+            {
+                return -1;
+            }
+            else
+            {
+                return CompareTo(carObj);
+            }
+        }
+        public int CompareTo(ModBuldozer obj)
+        {
+
+            var res = base.CompareTo(obj);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != obj.DopColor)
+            {
+                return DopColor.Name.CompareTo(obj.DopColor.Name);
+            }
+            if (BackSpoiler != obj.BackSpoiler)
+            {
+                return BackSpoiler.CompareTo(obj.BackSpoiler);
+            }
+            if (Bucket != obj.Bucket)
+            {
+                return Bucket.CompareTo(obj.Bucket);
+            }
+            if (IDopName != obj.IDopName)
+            {
+                return IDopName.CompareTo(obj.IDopName);
+            }
+            return 0;
+        }
+        private void printProp()
+        {
+            foreach (var str in this.ToString().Split(separator))
+            {
+                Console.WriteLine(str);
+            }
         }
     }
 }

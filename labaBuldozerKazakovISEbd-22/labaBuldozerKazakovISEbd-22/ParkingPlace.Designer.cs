@@ -50,6 +50,7 @@ namespace labaBuldozerKazakovISEbd_22
             this.загрузитьПарковкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button_sort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPark)).BeginInit();
             this.groupBoxPark.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -65,7 +66,7 @@ namespace labaBuldozerKazakovISEbd_22
             // 
             // buttonParking
             // 
-            this.buttonParking.Location = new System.Drawing.Point(698, 254);
+            this.buttonParking.Location = new System.Drawing.Point(694, 303);
             this.buttonParking.Name = "buttonParking";
             this.buttonParking.Size = new System.Drawing.Size(97, 41);
             this.buttonParking.TabIndex = 1;
@@ -167,7 +168,7 @@ namespace labaBuldozerKazakovISEbd_22
             // 
             // buttonOutQueue
             // 
-            this.buttonOutQueue.Location = new System.Drawing.Point(698, 214);
+            this.buttonOutQueue.Location = new System.Drawing.Point(694, 263);
             this.buttonOutQueue.Name = "buttonOutQueue";
             this.buttonOutQueue.Size = new System.Drawing.Size(96, 34);
             this.buttonOutQueue.TabIndex = 9;
@@ -233,11 +234,22 @@ namespace labaBuldozerKazakovISEbd_22
             // 
             this.saveFileDialog1.Filter = "txt file | *.txt";
             // 
+            // button_sort
+            // 
+            this.button_sort.Location = new System.Drawing.Point(694, 220);
+            this.button_sort.Name = "button_sort";
+            this.button_sort.Size = new System.Drawing.Size(94, 37);
+            this.button_sort.TabIndex = 11;
+            this.button_sort.Text = "Сортировать";
+            this.button_sort.UseVisualStyleBackColor = true;
+            this.button_sort.Click += new System.EventHandler(this.button_sort_Click);
+            // 
             // ParkingPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button_sort);
             this.Controls.Add(this.buttonOutQueue);
             this.Controls.Add(this.buttonAddParking);
             this.Controls.Add(this.buttonDelete);
@@ -284,5 +296,6 @@ namespace labaBuldozerKazakovISEbd_22
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem сохранитьПарковкуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem загрузитьПарковкуToolStripMenuItem;
+        private System.Windows.Forms.Button button_sort;
     }
 }

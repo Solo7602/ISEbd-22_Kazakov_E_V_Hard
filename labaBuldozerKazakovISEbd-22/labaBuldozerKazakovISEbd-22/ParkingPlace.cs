@@ -302,6 +302,15 @@ pictureBoxPark.Height);
 			}
 		}
 
+        private void button_sort_Click(object sender, EventArgs e)
+        {
+			if (listBoxParking.SelectedIndex > -1)
+			{
+				parkingCollection[listBoxParking.SelectedItem.ToString()].Sort();
+				Draw();
+				logger.Info("Сортировка уровней");
+			}
+		}
     }
 }
 

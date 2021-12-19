@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace labaBuldozerKazakovISEbd_22
 {
-    public class Parking<T, W>
+    public class Parking<T, W> : IEnumerator<T>, IEnumerable<T>
         where T : class, IBulldozer
         where W : InterDop
     {
@@ -17,6 +19,9 @@ namespace labaBuldozerKazakovISEbd_22
         private readonly int pictureHeight;
         private readonly int _placeSizeWidth = 305;
         private readonly int _placeSizeHeight = 157;
+        public int currentIndex;
+        public T Current => _places[currentIndex];
+        object IEnumerator.Current => _places[currentIndex];
         public Parking(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
@@ -25,6 +30,7 @@ namespace labaBuldozerKazakovISEbd_22
             pictureWidth = picWidth;
             pictureHeight = picHeight;
             _places = new List<T>();
+            currentIndex = -1;
         }
         public static bool operator +(Parking<T, W> p, T bulldozer)
         {
@@ -122,6 +128,31 @@ namespace labaBuldozerKazakovISEbd_22
         public void Clear()
         {
             _places.Clear();
+        }
+        public void Sort() => _places.Sort((IComparer<T>)new BulComparer());
+        public void Dispose() { }
+
+        public bool MoveNext()
+        {
+            currentIndex++;
+            if (currentIndex >= _places.Count)
+            {
+                Reset();
+                return false;
+            }
+            return true;
+        }
+        public void Reset()
+        {
+            currentIndex = -1;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }

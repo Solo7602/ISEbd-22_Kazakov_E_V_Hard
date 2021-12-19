@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulComparare.cs" />
     <Compile Include="BulldozerBase.cs" />
     <Compile Include="enum.cs" />
     <Compile Include="enumWheel.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="InterfaceDop.cs" />
     <Compile Include="ModBulldozer.cs" />
     <Compile Include="Parking.cs" />
+    <Compile Include="ParkingAlreadyHaveException.cs" />
     <Compile Include="ParkingCollection.cs" />
     <Compile Include="ParkingNotFoundException.cs" />
     <Compile Include="ParkingOccupiedPlaceException.cs" />
